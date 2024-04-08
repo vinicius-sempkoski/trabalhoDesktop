@@ -11,7 +11,7 @@ package com.mycompany.trabalhodesktop;
 public class TrabalhoDesktop {
 
     public static void main(String[] args) {
-        new telaLogin().setVisible(true);
-        
+        //new telaLogin().setVisible(true);
+        new ordemDeServico().setVisible(true);
     }
 }
