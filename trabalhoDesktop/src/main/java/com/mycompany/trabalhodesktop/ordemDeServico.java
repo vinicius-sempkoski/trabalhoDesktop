@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.trabalhodesktop;
 
 import java.text.DecimalFormat;
@@ -10,49 +6,51 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author aluno
+ * @author Vinicius
  */
 public class ordemDeServico extends javax.swing.JFrame {
 
     /**
      * Creates new form ordemDeServico
      */
+    private String nomeCompleto;
+
     DecimalFormat df = new DecimalFormat("#.##");
     public double valorTotalServicos;
     public double valorTotalPecas;
     private DefaultTableModel modelo = new DefaultTableModel();
     private DefaultTableModel modelo2 = new DefaultTableModel();
     private int linhaSelecionada = -1;
-    
+
     public ordemDeServico() {
         initComponents();
-        setLocationRelativeTo(this);
+        setLocationRelativeTo(null);
         carregaTabela();
         carregaTabelaPecas();
     }
-    
+
     public void carregaTabela() {
-    modelo.addColumn("Serviço");
-    modelo.addColumn("Quantidade");
-    modelo.addColumn("Valor");
-    modelo.addColumn("Valor Total");
-    tbServicos.setModel(modelo);
-    tbServicos.getColumnModel().getColumn(0).setPreferredWidth(350);
-    tbServicos.getColumnModel().getColumn(1).setPreferredWidth(290);
-    tbServicos.getColumnModel().getColumn(2).setPreferredWidth(290);
-    tbServicos.getColumnModel().getColumn(3).setPreferredWidth(290);
+        modelo.addColumn("Serviço");
+        modelo.addColumn("Quantidade");
+        modelo.addColumn("Valor");
+        modelo.addColumn("Valor Total");
+        tbServicos.setModel(modelo);
+        tbServicos.getColumnModel().getColumn(0).setPreferredWidth(350);
+        tbServicos.getColumnModel().getColumn(1).setPreferredWidth(290);
+        tbServicos.getColumnModel().getColumn(2).setPreferredWidth(290);
+        tbServicos.getColumnModel().getColumn(3).setPreferredWidth(290);
     }
-    
+
     public void carregaTabelaPecas() {
-    modelo2.addColumn("Peça");
-    modelo2.addColumn("Quantidade");
-    modelo2.addColumn("Valor");
-    modelo2.addColumn("Valor Total");
-    tbPecas.setModel(modelo2);
-    tbPecas.getColumnModel().getColumn(0).setPreferredWidth(350);
-    tbPecas.getColumnModel().getColumn(1).setPreferredWidth(290);
-    tbPecas.getColumnModel().getColumn(2).setPreferredWidth(290);
-    tbPecas.getColumnModel().getColumn(3).setPreferredWidth(290);
+        modelo2.addColumn("Peça");
+        modelo2.addColumn("Quantidade");
+        modelo2.addColumn("Valor");
+        modelo2.addColumn("Valor Total");
+        tbPecas.setModel(modelo2);
+        tbPecas.getColumnModel().getColumn(0).setPreferredWidth(350);
+        tbPecas.getColumnModel().getColumn(1).setPreferredWidth(290);
+        tbPecas.getColumnModel().getColumn(2).setPreferredWidth(290);
+        tbPecas.getColumnModel().getColumn(3).setPreferredWidth(290);
     }
 
     /**
@@ -73,6 +71,7 @@ public class ordemDeServico extends javax.swing.JFrame {
         tfQuantidade = new javax.swing.JTextField();
         tfValor = new javax.swing.JTextField();
         btSalvar = new javax.swing.JButton();
+        btEditarServico = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbServicos = new javax.swing.JTable();
@@ -91,9 +90,12 @@ public class ordemDeServico extends javax.swing.JFrame {
         tfQuantidadePeca = new javax.swing.JTextField();
         tfValorPeca = new javax.swing.JTextField();
         btSalvarPecas = new javax.swing.JButton();
+        btEditarPeca = new javax.swing.JButton();
+        btresumo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Ordem de Serviço");
 
         jLabel8.setText("Serviço:");
@@ -121,6 +123,13 @@ public class ordemDeServico extends javax.swing.JFrame {
             }
         });
 
+        btEditarServico.setText("Editar");
+        btEditarServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarServicoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -130,19 +139,21 @@ public class ordemDeServico extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(tfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9))
-                        .addGap(36, 36, 36)
+                        .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tfServico, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btEditarServico)
+                .addGap(18, 18, 18)
                 .addComponent(btSalvar)
                 .addGap(27, 27, 27))
         );
@@ -162,7 +173,9 @@ public class ordemDeServico extends javax.swing.JFrame {
                     .addComponent(jLabel10)
                     .addComponent(tfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btSalvar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btSalvar)
+                    .addComponent(btEditarServico))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -179,7 +192,7 @@ public class ordemDeServico extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbServicos);
 
-        jLabel2.setText("Valor Total Serviços: ");
+        jLabel2.setText("Valor Total Serviços: R$");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -191,7 +204,7 @@ public class ordemDeServico extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
+                        .addGap(79, 79, 79)
                         .addComponent(lbTotalServicos)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -204,7 +217,7 @@ public class ordemDeServico extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lbTotalServicos))
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         tbPecas.setModel(new javax.swing.table.DefaultTableModel(
@@ -220,7 +233,7 @@ public class ordemDeServico extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tbPecas);
 
-        jLabel3.setText("Valor Total Peças: ");
+        jLabel3.setText("Valor Total Peças:  R$");
 
         javax.swing.GroupLayout lbTotalPecasLayout = new javax.swing.GroupLayout(lbTotalPecas);
         lbTotalPecas.setLayout(lbTotalPecasLayout);
@@ -232,20 +245,20 @@ public class ordemDeServico extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(lbTotalPecasLayout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(41, 41, 41)
-                        .addComponent(lbTotalValorPecas)))
+                        .addGap(44, 44, 44)
+                        .addComponent(lbTotalValorPecas, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         lbTotalPecasLayout.setVerticalGroup(
             lbTotalPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(lbTotalPecasLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(lbTotalPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lbTotalValorPecas))
-                .addContainerGap())
+                .addGroup(lbTotalPecasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lbTotalValorPecas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(10, 10, 10))
         );
 
         peca.setText("Peça");
@@ -253,6 +266,12 @@ public class ordemDeServico extends javax.swing.JFrame {
         valorPeca.setText("Valor: ");
 
         quantidadePeca.setText("Quantidade:");
+
+        tfPeca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPecaActionPerformed(evt);
+            }
+        });
 
         tfQuantidadePeca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,35 +292,42 @@ public class ordemDeServico extends javax.swing.JFrame {
             }
         });
 
+        btEditarPeca.setText("Editar");
+        btEditarPeca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEditarPecaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(quantidadePeca)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(quantidadePeca)
+                            .addComponent(valorPeca)
+                            .addComponent(peca))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfQuantidadePeca, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(peca)
-                            .addComponent(valorPeca))
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfValorPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btSalvarPecas)
-                .addGap(27, 27, 27))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfValorPeca)
+                            .addComponent(tfQuantidadePeca)
+                            .addComponent(tfPeca, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btEditarPeca)
+                        .addGap(18, 18, 18)
+                        .addComponent(btSalvarPecas)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(peca)
                     .addComponent(tfPeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -314,31 +340,43 @@ public class ordemDeServico extends javax.swing.JFrame {
                     .addComponent(quantidadePeca)
                     .addComponent(tfQuantidadePeca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btSalvarPecas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btSalvarPecas)
+                    .addComponent(btEditarPeca))
+                .addContainerGap())
         );
+
+        btresumo.setText("Resumo");
+        btresumo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btresumoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(419, 419, 419)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90))
+                        .addGap(87, 87, 87)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbTotalPecas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbTotalPecas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(419, 419, 419)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btresumo)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -350,15 +388,17 @@ public class ordemDeServico extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
+                        .addGap(18, 18, 18)
                         .addComponent(lbTotalPecas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(btresumo)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(50, 50, 50))))
         );
 
         pack();
@@ -373,42 +413,43 @@ public class ordemDeServico extends javax.swing.JFrame {
     }//GEN-LAST:event_tfValorActionPerformed
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-    String servico = tfServico.getText();
-    int quantidade;
-    double valor;
+        String servico = tfServico.getText();
+        int quantidade;
+        double valor;
 
-    try {
-        quantidade = Integer.parseInt(tfQuantidade.getText());
-        valor = Double.parseDouble(tfValor.getText());
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Digite valores numéricos válidos para quantidade e valor!");
-        return; // Encerra o método caso a conversão falhe
-    }
-
-    if (!servico.isEmpty() && quantidade > 0 && valor > 0) {
-        if (linhaSelecionada >= 0) {
-            modelo.removeRow(linhaSelecionada);
-            modelo.insertRow(linhaSelecionada, new Object[]{servico, quantidade, valor});
-            JOptionPane.showMessageDialog(this, "Serviço editado com sucesso!");
-        } else {
-            double total = quantidade * valor;
-            modelo.addRow(new Object[]{servico, quantidade, valor, total});
-            JOptionPane.showMessageDialog(this, "Serviço cadastrado com sucesso!");
-            
-            this.valorTotalServicos += total;
-            lbTotalServicos.setText(String.valueOf(valorTotalServicos));
+        try {
+            quantidade = Integer.parseInt(tfQuantidade.getText());
+            valor = Double.parseDouble(tfValor.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Digite valores numéricos válidos para quantidade e valor!");
+            return;
         }
 
-        tfServico.setText("");
-        tfQuantidade.setText("");
-        tfValor.setText("");
-        tfServico.requestFocus();
-        linhaSelecionada = -1;
-    } else {
-        JOptionPane.showMessageDialog(this, "Digite um R.A ou nome válido!");
-    }
+        if (!servico.isEmpty() && quantidade > 0 && valor > 0) {
+            if (linhaSelecionada >= 0) {
+                double totalAntigo = (int) tbServicos.getValueAt(linhaSelecionada, 1) * (double) tbServicos.getValueAt(linhaSelecionada, 2);
+                modelo.removeRow(linhaSelecionada);
+                modelo.insertRow(linhaSelecionada, new Object[]{servico, quantidade, valor, quantidade * valor});
+                valorTotalServicos += (quantidade * valor - totalAntigo);
+                JOptionPane.showMessageDialog(this, "Serviço editado com sucesso!");
+            } else {
+                double total = quantidade * valor;
+                modelo.addRow(new Object[]{servico, quantidade, valor, total});
+                valorTotalServicos += total;
+                JOptionPane.showMessageDialog(this, "Serviço cadastrado com sucesso!");
 
-        
+            }
+
+            lbTotalServicos.setText(String.valueOf(valorTotalServicos));
+            tfServico.setText("");
+            tfQuantidade.setText("");
+            tfValor.setText("");
+            tfServico.requestFocus();
+            linhaSelecionada = -1;
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Digite um Serviço com nome válido!");
+        }
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void tfQuantidadePecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfQuantidadePecaActionPerformed
@@ -420,49 +461,129 @@ public class ordemDeServico extends javax.swing.JFrame {
     }//GEN-LAST:event_tfValorPecaActionPerformed
 
     private void btSalvarPecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarPecasActionPerformed
-    String peca = tfPeca.getText();
-    int quantidade;
-    double valor;
+        String peca = tfPeca.getText();
+        int quantidade;
+        double valor;
 
-    try {
-        quantidade = Integer.parseInt(tfQuantidadePeca.getText());
-        valor = Double.parseDouble(tfValorPeca.getText());
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Digite valores numéricos válidos para quantidade e valor!");
-        return; // Encerra o método caso a conversão falhe
-    }
-
-    if (!peca.isEmpty() && quantidade > 0 && valor > 0) {
-        if (linhaSelecionada >= 0) {
-            modelo2.removeRow(linhaSelecionada);
-            modelo2.insertRow(linhaSelecionada, new Object[]{peca, quantidade, valor});
-            JOptionPane.showMessageDialog(this, "Serviço editado com sucesso!");
-        } else {
-            double total = quantidade * valor;
-            modelo2.addRow(new Object[]{peca, quantidade, valor, total});
-            JOptionPane.showMessageDialog(this, "Serviço cadastrado com sucesso!");
-            
-            this.valorTotalPecas += total;
-            lbTotalValorPecas.setText(String.valueOf(valorTotalPecas));
+        try {
+            quantidade = Integer.parseInt(tfQuantidadePeca.getText());
+            valor = Double.parseDouble(tfValorPeca.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Digite valores numéricos válidos para quantidade e valor!");
+            return;
         }
 
-        tfPeca.setText("");
-        tfQuantidadePeca.setText("");
-        tfValorPeca.setText("");
-        tfPeca.requestFocus();
-        linhaSelecionada = -1;
-    } else {
-        JOptionPane.showMessageDialog(this, "Digite um R.A ou nome válido!");
-    }
+        if (!peca.isEmpty() && quantidade > 0 && valor > 0) {
+            if (linhaSelecionada >= 0) {
+                double totalAntigo = (int) tbPecas.getValueAt(linhaSelecionada, 1) * (double) tbPecas.getValueAt(linhaSelecionada, 2);
+                modelo2.removeRow(linhaSelecionada);
+                modelo2.insertRow(linhaSelecionada, new Object[]{peca, quantidade, valor, quantidade * valor});
+                valorTotalPecas += (quantidade * valor - totalAntigo);
+                JOptionPane.showMessageDialog(this, "Peça editada com sucesso!");
+            } else {
+                double total = quantidade * valor;
+                modelo2.addRow(new Object[]{peca, quantidade, valor, total});
+                valorTotalPecas += total; 
+                JOptionPane.showMessageDialog(this, "Peça cadastrada com sucesso!");
+
+            }
+
+            lbTotalValorPecas.setText(String.valueOf(valorTotalPecas));
+            tfPeca.setText("");
+            tfQuantidadePeca.setText("");
+            tfValorPeca.setText("");
+            tfPeca.requestFocus();
+            linhaSelecionada = -1;
+        } else {
+            JOptionPane.showMessageDialog(this, "Digite uma peça com nome válido!");
+        }
     }//GEN-LAST:event_btSalvarPecasActionPerformed
+
+    public Object[] getDadosPecaSelecionada() {
+        int linhaSelecionada = tbPecas.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+            Object[] dadosPeca = new Object[3];
+            for (int i = 0; i < dadosPeca.length; i++) {
+                dadosPeca[i] = modelo2.getValueAt(linhaSelecionada, i);
+            }
+            return dadosPeca;
+        }
+        return null;
+    }
+
+    public Object[] getDadosServicoSelecionado() {
+        int linhaSelecionada = tbServicos.getSelectedRow();
+        if (linhaSelecionada >= 0) {
+            Object[] dadosServico = new Object[3];
+            for (int i = 0; i < dadosServico.length; i++) {
+                dadosServico[i] = modelo.getValueAt(linhaSelecionada, i);
+            }
+            return dadosServico;
+        }
+        return null;
+    }
+
+    private void btresumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btresumoActionPerformed
+
+        boolean tabelaPecasPreenchida = tbPecas.getRowCount() > 0;
+        boolean tabelaServicosPreenchida = tbServicos.getRowCount() > 0;
+
+        if (tabelaPecasPreenchida || tabelaServicosPreenchida) {
+            resumoTotal resumo = new resumoTotal(modelo2, modelo, valorTotalPecas, valorTotalServicos);
+            resumo.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Adicione pelo menos uma peça ou serviço para prosseguir");
+        }
+    }//GEN-LAST:event_btresumoActionPerformed
+
+    private void tfPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPecaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfPecaActionPerformed
+
+    private void btEditarPecaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarPecaActionPerformed
+        linhaSelecionada = -1;
+        linhaSelecionada = tbPecas.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            String peca = (String) tbPecas.getValueAt(linhaSelecionada, 0);
+            int quantidade = (int) tbPecas.getValueAt(linhaSelecionada, 1);
+            double valor = (double) tbPecas.getValueAt(linhaSelecionada, 2);
+
+            tfPeca.setText(peca);
+            tfQuantidadePeca.setText(String.valueOf(quantidade));
+            tfValorPeca.setText(String.valueOf(valor));
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione uma peça na tabela!");
+        }
+    }//GEN-LAST:event_btEditarPecaActionPerformed
+
+    private void btEditarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarServicoActionPerformed
+        linhaSelecionada = -1;
+        linhaSelecionada = tbServicos.getSelectedRow();
+
+        if (linhaSelecionada >= 0) {
+            String servico = (String) tbServicos.getValueAt(linhaSelecionada, 0);
+            int quantidade = (int) tbServicos.getValueAt(linhaSelecionada, 1);
+            double valor = (double) tbServicos.getValueAt(linhaSelecionada, 2);
+
+            tfServico.setText(servico);
+            tfQuantidade.setText(String.valueOf(quantidade));
+            tfValor.setText(String.valueOf(valor));
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um serviço na tabela!");
+        }
+    }//GEN-LAST:event_btEditarServicoActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btEditarPeca;
+    private javax.swing.JButton btEditarServico;
     private javax.swing.JButton btSalvar;
     private javax.swing.JButton btSalvarPecas;
+    private javax.swing.JButton btresumo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
